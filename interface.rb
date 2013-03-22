@@ -31,6 +31,7 @@ class CheckersInterface
 			end
 			turn = switch_turn(turn)
 		end
+		print_board
 		print_winner(@board.winner?)
 	end
 

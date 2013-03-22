@@ -40,6 +40,7 @@ class HumanPlayer < Player
 	end
 
 	def input_to_coordinate(position)
+		return false if position.length != 2
 		converted = []
 		converted[1] = @letter_to_number[position[0]]
 		converted[0] = position[1].to_i-1
