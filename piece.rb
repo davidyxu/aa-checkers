@@ -21,7 +21,7 @@ class Piece
 				next if out_of_bounds?(move)
 				if @board[move]
 					jump = [move[0]+direction, move[1]+side]
-					if @board[move].color != @color && @board[jump]
+					if @board[move].color != @color && !@board[jump]
 						moves << jump
 					end
 				else
@@ -31,7 +31,17 @@ class Piece
 		end
 		moves
 	end
-
+	def valid_jumps
+		#check for jumps
+	end
+	def move_to(destination)
+		difference = [destination[0]-position[0], destination[1] - position[1]]
+		if difference[0].abs == 2
+			jumped_position = [position[0]+difference[0]/2,position[1]+difference[1]/2]
+			@board.remove_piece_at(jumped_position)
+		end
+		@position = destination
+	end
 	def out_of_bounds?(move)
 		return true if move[0] < 0 || move[0] > 7 || move [1] < 0 || move[1] > 7
 		false

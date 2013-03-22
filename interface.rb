@@ -3,28 +3,33 @@ require './player'
 require 'colorize'
 
 class CheckersInterface
-	def initialize(red = HumanPlayer.new(:red), black = HumanPlayer.new(:black))
+	def initialize(red = :human, black = :human)
 		@board = Board.new
-		@red, @black = red, black
+		@red = setup_player(red, :red)
+		@black = setup_player(black, :black)
+	end
+	def setup_player(player_type, color)
+		case player_type
+		when :human then HumanPlayer.new(color, @board)
+		end
 	end
 	def play
 		turn = @red
 		until @board.over?
 			print_board
 			puts "#{turn.color.capitalize} player's Turn:"
-			move = turn.get_start
-			until @board.piece_at(move) && @board[move].color == turn.color
-				print_board
-				puts "Invalid move, please select a valid piece"
-				move = turn.get_start
-			end
-			valid_moves = @board[move].valid_moves
-			move = turn.get_destination(valid_moves)
-			turn == @red? @black : @red
+			start, destination = turn.get_move
+			p start
+			p destination
+			@board.move(start, destination)
+			turn = switch_turn(turn)
 		end
 	end
+	def switch_turn(turn)
+		turn == @red? @black : @red
+	end
 	def print_winner(winner)
-		puts "The winner is "
+		puts "#{winner.capitalize} is the winner."
 	end
 	def piece_positions_of(color)
 		@board.pieces_of(color).map { |piece| piece.position}

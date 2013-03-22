@@ -37,8 +37,14 @@ class Board
 	def winner
  		pieces_of(:red).empty? ? :black : :red
 	end
+	def remove_piece_at(position)
+		@pieces.reject! { |piece| piece.position == position }
+	end
 	def moves_of(position)
 		[position].valid_moves
+	end
+	def move(start, destination)
+		piece_at(start).move_to(destination)
 	end
 end
 
