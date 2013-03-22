@@ -3,19 +3,8 @@ require './piece'
 class Board
 	attr_reader :pieces
 	def initialize
-		#@pieces = initialize_pieces
-		@pieces = test_initialize
+		@pieces = initialize_pieces
 	end
-
-	def test_initialize
-		pieces = []
-		pieces << Piece.new(:red, [4,2], self)
-		pieces << Piece.new(:black, [5,3], self)
-		pieces << Piece.new(:black, [1,1], self)
-		pieces << Piece.new(:black, [3,3], self)
-		pieces << Piece.new(:red, [2,2], self)
-	end
-
 
 	def initialize_pieces
 		pieces = []
