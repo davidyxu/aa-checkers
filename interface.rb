@@ -40,7 +40,11 @@ class CheckersInterface
 	end
 
 	def print_winner(winner)
-		puts "#{winner.capitalize} is the winner."
+		if winner == :tie
+			puts "Draw!"
+		else
+			puts "#{winner.capitalize} is the winner."
+		end
 	end
 
 	def piece_positions_of(color)

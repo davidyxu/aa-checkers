@@ -46,6 +46,7 @@ class Board
 	def winner?
 		return :black if pieces_of(:red).empty?
 		return :red if pieces_of(:black).empty?
+		return :tie if !valid_moves_left?(:red) && !valid_moves_left?(:red)
 		return :black unless valid_moves_left?(:red)
 		return :red unless valid_moves_left?(:black)
  		false
